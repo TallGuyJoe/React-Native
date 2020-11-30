@@ -1,7 +1,15 @@
-import React, { Component } from "react";
-import { ScrollView, Text, FlatList, ListItem } from "react-native";
-import { Card } from 'react-native-elements';
-import PARTNERS from '../shared/partners';
+import React, { Component } from 'react';
+import { ScrollView, Text, FlatList } from 'react-native';
+import { Card, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+//mapStateProps receives the state as a prop and returns the partners data from the state this is the way that redux has defined for us to use to signal what part of the state we are interested in using we dont want to grab the entire state when we only need a part of it
+const mapStateToProps = state => {
+    return {
+        partners: state.partners
+    };
+};
 
 
 function Mission() {
@@ -14,12 +22,6 @@ function Mission() {
 }
 
 class About extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            partners: PARTNERS
-        }
-    }
     
     static navigationOptions = {
         title: 'About'
@@ -31,7 +33,7 @@ class About extends Component {
                 <ListItem 
                     title={item.name}
                     subtitle={item.description}
-                    leftAvatar={{ source: require('./images/bootstrap-logo.png')}}
+                    leftAvatar={{source: {uri: baseUrl + item.image}}}
                 />
             )
         }
@@ -40,7 +42,8 @@ class About extends Component {
                 <Mission />
                 <Card title="Community Partners">
                     <FlatList
-                        data={this.props.partners}
+                    // why two partners, the first partners here refers to the entire part of the state that handles the partners data including the is loading and error message properties along withe partners array and the second partners array here is actually refers to the partners data array
+                        data={this.props.partners.partners}
                         keyExtractor={item => item.id.toString()}
                         renderItem={renderPartner}
                     />
@@ -50,4 +53,5 @@ class About extends Component {
     }
 }
 
-export default About;
+// the connect takes care of making sure that the about component now receives the partners props from the redux store
+export default connect(mapStateToProps) (About);

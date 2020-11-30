@@ -1,3 +1,5 @@
+// exporting a configureStore function that returns the results of calling the redux function createStore with a combineReducers argument that combines all the reducers into a single root reducer along with a call to applyMiddleWare to enable redux thunk and redux logger to work
+
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -18,4 +20,5 @@ export const ConfigureStore = () => {
     );
 
     return store;
-}
+};
+
