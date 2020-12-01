@@ -8,6 +8,7 @@ import { comments } from './comments';
 import { promotions } from './promotions';
 import { partners } from './partners';
 
+
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
@@ -18,7 +19,5 @@ export const ConfigureStore = () => {
         }),
         applyMiddleware(thunk, logger)
     );
-
-    return store;
-};
-
+return store;
+}

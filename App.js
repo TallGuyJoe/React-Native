@@ -13,4 +13,4 @@ export default function App() {
     );
 }
 
-//passing the store to the provider component as prop this gives the main component and all of its child components the ability to connect to redux store
+// passing the store to the provider component as prop this gives the main component and all of its child components the ability to connect to redux store

@@ -15,13 +15,12 @@ import { fetchCampsites, fetchComments, fetchPromotions,
     fetchPartners } from '../redux/ActionCreators';
 
     // these are the action creators that have been thunked in order to send asynchronous calls using fetch to the server to bring back data from the server. using mapDispatchToProps object allows use to access these action creators as props just as the mapToStateProps allowed us to access the state data as props
-const mapDispatchToProps = {
+	const mapDispatchToProps = {
     fetchCampsites,
     fetchComments,
     fetchPromotions,
     fetchPartners
 };
-
 
 const DirectoryNavigator = createStackNavigator(
     {
@@ -216,11 +215,11 @@ class Main extends Component {
 
     componentDidMount() {
         this.props.fetchCampsites();
-        this.props.fetchPromotions();
+        this.props.fetchComments();
         this.props.fetchPromotions();
         this.props.fetchPartners();
-
     }
+
 
     render() {
         return (
@@ -263,4 +262,4 @@ const styles = StyleSheet.create({
     }
 });
 
-	export default connect(null, mapDispatchToProps) (Main);
+export default connect(null, mapDispatchToProps) (Main);

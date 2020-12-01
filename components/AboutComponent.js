@@ -3,6 +3,8 @@ import { ScrollView, Text, FlatList } from 'react-native';
 import { Card, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
+
 
 //mapStateProps receives the state as a prop and returns the partners data from the state this is the way that redux has defined for us to use to signal what part of the state we are interested in using we dont want to grab the entire state when we only need a part of it
 const mapStateToProps = state => {
@@ -36,6 +38,29 @@ class About extends Component {
                     leftAvatar={{source: {uri: baseUrl + item.image}}}
                 />
             )
+        }
+
+        if (this.props.partners.isLoading) {
+            return (
+                <ScrollView>
+                    <Mission />
+                    <Card
+                        title='Community Partners'>
+                        <Loading />
+                    </Card>
+                </ScrollView>
+            );
+        }
+        if (this.props.partners.errMess) {
+            return (
+                <ScrollView>
+                    <Mission />
+                    <Card
+                        title='Community Partners'>
+                        <Text>{this.props.partners.errMess}</Text>
+                    </Card>
+                </ScrollView>
+            );
         }
         return(
             <ScrollView>
