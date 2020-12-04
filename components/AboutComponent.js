@@ -4,6 +4,7 @@ import { Card, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
+import * as Animatable from 'react-native-animatable';
 
 
 //mapStateProps receives the state as a prop and returns the partners data from the state this is the way that redux has defined for us to use to signal what part of the state we are interested in using we dont want to grab the entire state when we only need a part of it
@@ -54,25 +55,29 @@ class About extends Component {
         if (this.props.partners.errMess) {
             return (
                 <ScrollView>
-                    <Mission />
-                    <Card
-                        title='Community Partners'>
-                        <Text>{this.props.partners.errMess}</Text>
-                    </Card>
+                    <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
+                        <Mission />
+                        <Card
+                            title='Community Partners'>
+                            <Text>{this.props.partners.errMess}</Text>
+                        </Card>
+                    </Animatable.View>
                 </ScrollView>
             );
         }
         return(
             <ScrollView>
-                <Mission />
-                <Card title="Community Partners">
-                    <FlatList
-                    // why two partners, the first partners here refers to the entire part of the state that handles the partners data including the is loading and error message properties along withe partners array and the second partners array here is actually refers to the partners data array
-                        data={this.props.partners.partners}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={renderPartner}
-                    />
-                </Card>
+                <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
+                    <Mission />
+                    <Card title="Community Partners">
+                        <FlatList
+                        // why two partners, the first partners here refers to the entire part of the state that handles the partners data including the is loading and error message properties along withe partners array and the second partners array here is actually refers to the partners data array
+                            data={this.props.partners.partners}
+                            keyExtractor={item => item.id.toString()}
+                            renderItem={renderPartner}
+                        />
+                    </Card>
+                </Animatable.View>
             </ScrollView>
         );
     }
