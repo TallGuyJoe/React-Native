@@ -33,7 +33,23 @@ class Favorites extends Component {
                     <View style={styles.deleteView}>
                         <TouchableOpacity 
                             style={styles.deleteTouchable} 
-                            onPress={() => this.props.deleteFavorite(item.id)}
+                            onPress={() => 
+                                Alert.alert(
+                                    'Delete Favorite?',
+                                    'Are you sure you want to delete the favorite campsite' + item.name + '?',
+                                [
+                                    {
+                                        text: 'Cancel',
+                                        onPress: () => console.log(item.name + 'Not Deleted'),
+                                        style: 'cancel'
+                                    },
+                                    {
+                                        text: 'OK',
+                                        onPress: () => this.props.deleteFavorite(item.id)
+                                    },
+                                ],
+                                { cancelable: false }
+                            )}
                         >
                             <Text style={styles.deleteText}>Delete</Text>
                         </TouchableOpacity>
